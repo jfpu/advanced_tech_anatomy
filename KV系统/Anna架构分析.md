@@ -32,7 +32,7 @@ Anna通过采用wait-free execution及coordination-free consistency（简化理�
 
 ### 1.3 Anna角色分配
 
-![anna架构.png](/uploads/B9FA5C2B023748D5ACC8AC3580DA6FCC/anna架构.png)
+![](https://github.com/jfpu/advanced_tech_anatomy/blob/master/KV%E7%B3%BB%E7%BB%9F/anna_arch_pic/anna%E6%9E%B6%E6%9E%84.png)
 
 Anna是支持分布式部署的KVS，系统由两部分组成： 客户端代理及Anna服务节点；但是，在单机s个服务进程上（比如：单个redis实例，单个TDE/tair实例），Anna与常见的其他KVS是有区别的，Anna服务节点里存在与CPU核数对等的Actro Core（可以理解为服务线程），其是Anna服务的基础组件；而Server只是一台物理机上部署Anna服务的逻辑概念。
 
@@ -80,7 +80,7 @@ __Actor加入与退出:__
 
 ### 1.4 Anna KV数据结构
 
-![anna数据结构设计.png](/uploads/B5EADB0ED4684BE08E29395F88B143DE/anna数据结构设计.png)
+![](https://github.com/jfpu/advanced_tech_anatomy/blob/master/KV%E7%B3%BB%E7%BB%9F/anna_arch_pic/anna%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1.png)
 
 Anna在数据结构设计中，将KV数据与用户ID及修改的版本号一一关联起来。
 
@@ -147,7 +147,7 @@ VI节重点阐释一致性分类。理解一致性分类级别需要需要深入
 
 - 竞争条件： zipf = 4
 
-![测试-高竞争.png](/uploads/E3C45E0D8D6545D6B07F050F8D508B16/测试-高竞争.png)
+![](https://github.com/jfpu/advanced_tech_anatomy/blob/master/KV%E7%B3%BB%E7%BB%9F/anna_arch_pic/%E6%B5%8B%E8%AF%95-%E9%AB%98%E7%AB%9E%E4%BA%89.png)
 
 在高竞争条件下，TBB、Mastree主要时耗用于多核之间数据互斥同步，因此，系统规模（线程数量）的增加，带来的性能提升有限。
 IDEAL代表的是基于互斥机制的性能上限（数据不一致）
@@ -159,7 +159,7 @@ Anna本身将主要时耗用于请求处理上，因此，性能远高于传统K
 
 - 竞争条件： zipf = 0.5
 
-![测试-低竞争.png](/uploads/893F36EEF1904C40BF2AFF9F49F63D2A/测试-低竞争.png)
+![](https://github.com/jfpu/advanced_tech_anatomy/blob/master/KV%E7%B3%BB%E7%BB%9F/anna_arch_pic/%E6%B5%8B%E8%AF%95-%E4%BD%8E%E7%AB%9E%E4%BA%89.png)
 
 在低竞争条件下，TBB、Mastree及IDEAL的性能在一定程度上可以通过增加系统规模（线程数量）来提升，当然，提升的效果还是比较有限
 而Anna在低竞争条件下，优于KEY值冲突较小，actor发送方merge功能的作用减小；而且需要组播更新的KV数量大幅度增加；导致备份的数量增大了系统负载。因此，Anna单备份在低竞争条件下性能表现最优
@@ -173,7 +173,7 @@ Anna本身将主要时耗用于请求处理上，因此，性能远高于传统K
 - Anna备份参数： 3
 - 测试流量： 低竞争
 
-![测试-扩展性.png](/uploads/1AA919CCA88141488050ED5A46A65829/测试-扩展性.png)
+![](https://github.com/jfpu/advanced_tech_anatomy/blob/master/KV%E7%B3%BB%E7%BB%9F/anna_arch_pic/%E6%B5%8B%E8%AF%95-%E6%89%A9%E5%B1%95%E6%80%A7.png)
 
 Anna系统的性能与集群规模成线性正比
 
@@ -187,7 +187,7 @@ Anna系统的性能与集群规模成线性正比
   - 2.流量突增3倍的同时增加64个actor，执行20s
   - 3.流量和actor数量回调到步骤1的时候
 
-![测试-弹性可扩展图.png](/uploads/2C38F79EFC9A46509E84CB5006BA8BA8/测试-弹性可扩展图.png)
+![](https://github.com/jfpu/advanced_tech_anatomy/blob/master/KV%E7%B3%BB%E7%BB%9F/anna_arch_pic/%E6%B5%8B%E8%AF%95-%E5%BC%B9%E6%80%A7%E5%8F%AF%E6%89%A9%E5%B1%95%E5%9B%BE.png)
 
 从测试数据看，Anna系统在弹性扩容方面的表现很优秀，集群吞吐量与资源容量几乎成正比。
 当然，文章中没有针对集群扩缩容时服务可靠性的测试数据，__暂时不清楚Anna是否完全保证扩缩容时服务稳定性__
@@ -196,7 +196,7 @@ Anna系统的性能与集群规模成线性正比
 
 - 测试流量： PUT、GET混合
 
-![测试-读写并发.png](/uploads/1BD61271F2DB40DAB8287892B860A3B4/测试-读写并发.png)
+![](https://github.com/jfpu/advanced_tech_anatomy/blob/master/KV%E7%B3%BB%E7%BB%9F/anna_arch_pic/%E6%B5%8B%E8%AF%95-%E8%AF%BB%E5%86%99%E5%B9%B6%E5%8F%91.png)
 
 高竞争测试原因如上。
 单节点上，在低竞争条件下，Anna与Redis性能并没有区别
@@ -205,7 +205,7 @@ Anna系统的性能与集群规模成线性正比
 
 - 备份参数： 3
 
-![测试-分布式.png](/uploads/E0B9491427AF4B47B60C022DC6E797D6/测试-分布式.png)
+![](https://github.com/jfpu/advanced_tech_anatomy/blob/master/KV%E7%B3%BB%E7%BB%9F/anna_arch_pic/%E6%B5%8B%E8%AF%95-%E5%88%86%E5%B8%83%E5%BC%8F.png)
 
 高竞争测试原因如上。
 
