@@ -273,7 +273,11 @@ Anna采用的Coordination-free actor model具备独立的异步通信具备代�
 ## 参考资料：
 
 [伯克利推出世界最快的KVS数据库Anna：秒杀Redis和Cassandra](https://www.itcodemonkey.com/article/2628.html)
+
 [The Declarative Imperative](http://db.cs.berkeley.edu/papers/sigrec10-declimperative.pdf)
+
 [Coordination Avoidance in Database Systems](http://www.vldb.org/pvldb/vol8/p185-bailis.pdf)
+
 [Highly Available Transactions: Virtues and Limitations](http://www.vldb.org/pvldb/vol7/p181-bailis.pdf)
+
 [Anna: A KVS For Any Scale](https://arxiv.org/pdf/1309.3324.pdf)
