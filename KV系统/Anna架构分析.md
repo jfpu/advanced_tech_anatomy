@@ -280,4 +280,4 @@ Anna采用的Coordination-free actor model具备独立的异步通信具备代�
 
 [Highly Available Transactions: Virtues and Limitations](http://www.vldb.org/pvldb/vol7/p181-bailis.pdf)
 
-[Anna: A KVS For Any Scale](https://arxiv.org/pdf/1309.3324.pdf)
+[Anna: A KVS For Any Scale](http://db.cs.berkeley.edu/jmh/papers/anna_ieee18.pdf)
